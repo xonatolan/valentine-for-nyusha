@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ Квест Любви для Нюши ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Красивые шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Comfortaa:wght@300;400;700&family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Фон с анимацией -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Экран приветствия -->
+        <div class="screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <div class="welcome-hearts">
+                    <span class="heart-float" style="--i:1">💖</span>
+                    <span class="heart-float" style="--i:2">💕</span>
+                    <span class="heart-float" style="--i:3">💞</span>
+                    <span class="heart-main">💝</span>
+                    <span class="heart-float" style="--i:4">💓</span>
+                    <span class="heart-float" style="--i:5">💗</span>
+                    <span class="heart-float" style="--i:6">💘</span>
+                </div>
+                <h1>Любимая Нюша!</h1>
+                <p class="subtitle">У меня для тебя квест на День Влюблённых!</p>
+                
+                <div class="instructions">
+                    <div class="instruction-item">
+                        <span class="icon">🎁</span>
+                        <div class="instruction-text">
+                            <h3>Собери 10 волшебных валентинок</h3>
+                            <p>Каждая хранит частичку моей любви к тебе</p>
+                        </div>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="icon">❤️</span>
+                        <div class="instruction-text">
+                            <h3>Открой все комплименты</h3>
+                            <p>Они созданы специально для тебя</p>
+                        </div>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="icon">✨</span>
+                        <div class="instruction-text">
+                            <h3>Получи особенный сюрприз!</h3>
+                            <p>В конце тебя ждет нечто волшебное</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sparkle-text">✨ Ты заслуживаешь всего самого прекрасного! ✨</div>
+                
+                <button class="start-btn pulse-animation" id="startBtn">
+                    <i class="fas fa-heart"></i> Начать квест любви! <i class="fas fa-heart"></i>
+                </button>
+                
+                <div class="counter">
+                    <span class="counter-heart">💖</span>
+                    <span id="collectedCount">0</span>/10 валентинок собрано
+                    <span class="counter-sparkles">✨✨✨</span>
+                </div>
+                
+                <div class="romantic-message">
+                    <p>«Любовь — это когда сердце говорит тихим голосом, а душа поет»</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Игровое поле -->
+<div class="screen hidden" id="gameScreen">
+    <div class="header">
+        <h2><i class="fas fa-heartbeat"></i> Квест любви для Нюши <i class="fas fa-heartbeat"></i></h2>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">0/10</div>
+            <div class="progress-sparkles"></div>
+        </div>
+        <p class="game-motivation">Найди все валентинки, чтобы получить сюрприз! 💝</p>
+    </div>
+    
+    <div class="game-grid" id="valentinesGrid">
+        <!-- Валентинки будут создаваться через JS -->
+    </div>
+    
+    <!-- ДОБАВЛЯЕМ КНОПКУ ДЛЯ ПЕРЕХОДА К ПОЗДРАВЛЕНИЮ -->
+    <div class="complete-section hidden" id="completeSection">
+        <div class="complete-message">
+            <div class="complete-icon">🎉</div>
+            <h3>Поздравляю! Ты собрала все валентинки! 🎯</h3>
+            <p>Теперь нажми на кнопку ниже, чтобы увидеть твой сюрприз! 💝</p>
+        </div>
+        <button class="complete-btn pulse-animation" id="completeBtn">
+            <i class="fas fa-gift"></i> Перейти к поздравлению! <i class="fas fa-gift"></i>
+        </button>
+    </div>
+    
+    <div class="floating-icons">
+        <span class="floating-icon">🌸</span>
+        <span class="floating-icon">💖</span>
+        <span class="floating-icon">🌟</span>
+        <span class="floating-icon">🌹</span>
+        <span class="floating-icon">💕</span>
+    </div>
+    
+    <div class="controls">
+        <button class="control-btn sparkle-btn" id="hintBtn">
+            <i class="fas fa-lightbulb"></i> Подсказка
+            <span class="btn-sparkles">✨</span>
+        </button>
+        <button class="control-btn sparkle-btn" id="musicBtn">
+            <i class="fas fa-music"></i> Музыка
+            <span class="btn-sparkles">🎵</span>
+        </button>
+        <button class="control-btn" id="resetBtn">
+            <i class="fas fa-redo"></i> Начать заново
+        </button>
+    </div>
+</div>
+        
+        <!-- Экран с комплиментом -->
+        <div class="screen hidden" id="complimentScreen">
+            <div class="compliment-content">
+                <div class="celebration-icons">
+                    <span>🎉</span>
+                    <span>✨</span>
+                    <span>🌟</span>
+                </div>
+                
+                <div class="valentine-number glow-text" id="valentineNumber">Валентинка #1</div>
+                <div class="valentine-heart heartbeat" id="valentineHeart">💌</div>
+                
+                <div class="compliment-container">
+                    <div class="compliment-text" id="complimentText">
+                        Загрузка комплимента...
+                    </div>
+                    <div class="quote-marks">"</div>
+                </div>
+                
+                <div class="flowers-animation">
+                    <span>🌸</span>
+                    <span>🌺</span>
+                    <span>🌷</span>
+                    <span>💐</span>
+                    <span>🌼</span>
+                    <span>🌹</span>
+                </div>
+                
+                <div class="compliment-footer">
+                    <p class="encouragement">Ты прекрасна! Продолжай в том же духе! 💪</p>
+                </div>
+                
+                <button class="next-btn pulse-animation" id="nextBtn">
+                    <i class="fas fa-arrow-right"></i> Искать следующую валентинку
+                    <span class="btn-sparkle">✨</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Финальный экран -->
+<div class="screen hidden" id="finalScreen">
+    <div class="final-content">
+        <div class="celebration-animation">
+            <span class="celebration-item" style="--delay:0">🎉</span>
+            <span class="celebration-item" style="--delay:0.2">🎊</span>
+            <span class="celebration-item" style="--delay:0.4">✨</span>
+            <span class="celebration-item" style="--delay:0.6">🌟</span>
+            <span class="celebration-item" style="--delay:0.8">🎈</span>
+        </div>
+        
+        <h1 class="glow-text">Поздравляю, Нюша! 💕</h1>
+        <p class="congrats sparkle-text">Ты собрала все 10 валентинок! Ты невероятна! 🎯</p>
+        
+        <!-- ВСТАВЬТЕ ФОТО НЮШИ ЗДЕСЬ (в финальном экране) -->
+<div class="nyusha-photo-section">
+    <div class="photo-frame-nyusha">
+        <!-- ЗАМЕНИТЕ ЭТУ ССЫЛКУ НА ФОТО НЮШИ -->
+        <img src="нюша.jpg" 
+             alt="Самая красивая Нюша" class="nyusha-photo">
+        <div class="photo-hearts-frame">
+            <span class="frame-heart">💖</span>
+            <span class="frame-heart">💕</span>
+            <span class="frame-heart">💞</span>
+        </div>
+        <div class="photo-caption-nyusha">Моя прекрасная Нюша! 💖</div>
+        <div class="photo-sparkles"></div>
+    </div>
+</div>
+                
+                <div class="surprise-section">
+                    <h2 class="surprise-title">🎀 А теперь твой сюрприз! 🎀</h2>
+                    <p class="surprise-subtitle">Нажми на подарок, чтобы открыть его!</p>
+                    
+                    <div class="gift-container" id="giftContainer">
+                        <div class="gift-box" id="giftBox">
+                            <div class="ribbon">
+                                <div class="ribbon-knot">🎀</div>
+                                <div class="ribbon-ends">
+                                    <div class="ribbon-end left"></div>
+                                    <div class="ribbon-end right"></div>
+                                </div>
+                            </div>
+                            <div class="gift-lid"></div>
+                            <div class="gift-body">
+                                <div class="gift-pattern">❤️❤️❤️</div>
+                            </div>
+                            <div class="gift-sparkles">
+                                <span class="sparkle"></span>
+                                <span class="sparkle"></span>
+                                <span class="sparkle"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="gift-message pulse-animation">
+                            🎁 Нажми на подарок! 🎁
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="final-hearts-animation">
+                    <span class="floating-heart" style="--i:1">💖</span>
+                    <span class="floating-heart" style="--i:2">💕</span>
+                    <span class="floating-heart" style="--i:3">💞</span>
+                    <span class="floating-heart" style="--i:4">💓</span>
+                    <span class="floating-heart" style="--i:5">💗</span>
+                    <span class="floating-heart" style="--i:6">💘</span>
+                    <span class="floating-heart" style="--i:7">💝</span>
+                </div>
+                
+                <button class="restart-btn pulse-animation" id="restartBtn">
+                    <i class="fas fa-heart"></i> Пройти квест еще раз! <i class="fas fa-heart"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Экран с фото-сюрпризом -->
+        <div class="screen hidden" id="photoScreen">
+            <div class="photo-content">
+                <div class="photo-celebration">
+                    <span>✨</span>
+                    <span>🎉</span>
+                    <span>🌟</span>
+                    <span>🎊</span>
+                    <span>💫</span>
+                </div>
+                
+                <h1 class="photo-title">Сюрприз! 🎁</h1>
+                <p class="photo-subtitle">Я приготовил для тебя кое-что особенное!</p>
+                
+                <div class="photo-frame-container">
+                    <div class="photo-frame">
+                        <div class="frame-decoration top">
+                            <span>💖</span>
+                            <span>💕</span>
+                            <span>💞</span>
+                        </div>
+                        
+                        <div class="photo-wrapper" id="photoWrapper">
+                            <!-- ВСТАВЬТЕ СВОЮ ФОТОГРАФИЮ ЗДЕСЬ -->
+                            <img src="никита.jpg" 
+                                 alt="Мой сюрприз для тебя!" class="surprise-photo">
+                            <div class="photo-bow">🎀</div>
+                        </div>
+                        
+                        <div class="frame-decoration bottom">
+                            <span>💓</span>
+                            <span>💗</span>
+                            <span>💘</span>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-hearts">
+                        <span class="photo-heart">❤️</span>
+                        <span class="photo-heart">🧡</span>
+                        <span class="photo-heart">💛</span>
+                        <span class="photo-heart">💚</span>
+                        <span class="photo-heart">💙</span>
+                        <span class="photo-heart">💜</span>
+                    </div>
+                </div>
+                
+                <div class="surprise-message">
+                    <div class="message-text glow-text">
+                        «Мой подарок это я и моя любовь к тебе!»
+                    </div>
+                    <div class="message-heart">💝</div>
+                </div>
+                
+                <div class="love-promise">
+                    <p>Каждый день я буду делать всё, чтобы ты чувствовала себя любимой и счастливой! 💖</p>
+                    <div class="promise-flowers">
+                        <span>🌸</span>
+                        <span>🌺</span>
+                        <span>🌷</span>
+                    </div>
+                </div>
+                
+                <div class="final-buttons">
+                    <button class="back-to-gift-btn" id="backToGiftBtn">
+                        <i class="fas fa-gift"></i> Вернуться к подарку
+                    </button>
+                    <button class="restart-from-photo-btn" id="restartFromPhotoBtn">
+                        <i class="fas fa-redo"></i> Начать сначала
+                    </button>
+                </div>
+                
+                <div class="eternal-love">
+                    <p>Наша любовь — вечна! 💞</p>
+                    <div class="infinity-symbol">∞</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Аудио -->
+    <audio id="backgroundMusic" loop>
+        <source src="музыка.mp3">
+        Ваш браузер не поддерживает аудио.
+    </audio>
+    
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+    <audio id="giftSound" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
+    <audio id="sparkleSound" src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3"></audio>
+    
+    <!-- Подключаем скрипты -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
